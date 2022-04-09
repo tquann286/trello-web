@@ -46,7 +46,7 @@ body {
 			flex: 0 0 auto;
 			width: 300px;
 			height: calc(100% - #{$gap});
-
+      margin-left: $gap;
 			> * {
 				background-color: $list-bg-color;
 				color: #333;
@@ -76,6 +76,16 @@ body {
 					100% - #{$column-header-height} - #{$column-footer-height}
 				);
 				overflow-y: auto;
+        &::-webkit-scrollbar {
+          -webkit-appearance: none;
+        }
+        &::-webkit-scrollbar:vertical {
+          width: 11px;
+        }
+        &::-webkit-scrollbar-thumb {
+          background-color: darken($list-bg-color, 15);
+          border-right: 5px solid $list-bg-color;
+        }
 				li {
 					background-color: #fbfbfb;
 					padding: $gap;
@@ -87,7 +97,7 @@ body {
 				}
 				img {
 					display: block;
-					width: calc(100% + 2 * #{$gap});
+					width: calc(100% - 2 * #{$gap});
 					margin: -$gap 0 $gap -$gap;
 					border-top-left-radius: $card-border-radius;
 					border-top-right-radius: $card-border-radius;
