@@ -1,8 +1,8 @@
 import React from 'react'
 
-import './Task.scss'
+import './Card.scss'
 
-function Task() {
+function Card() {
 	return (
 		<li className='task-item'>
 			<img
@@ -14,4 +14,4 @@ function Task() {
 	)
 }
 
-export default Task
+export default Card
