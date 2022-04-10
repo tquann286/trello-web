@@ -1,9 +1,13 @@
+import React from 'react'
 import './App.scss'
+
+// Custom components
+import AppBar from 'components/AppBar/AppBar'
 
 function App() {
 	return (
 		<div className='trello-trungquandev-master'>
-			<nav className='navbar app'>App Bar</nav>
+			<AppBar />
 			<nav className='navbar board'>Board Bar</nav>
 			<div className='board-columns'>
 				<div className='column'>
