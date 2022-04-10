@@ -1,13 +1,5 @@
 @import '_setting.scss';
 
-$column-header-height: 36px;
-$column-footer-height: 36px;
-$column-border-radius: 5px;
-$card-border-radius: 4px;
-
-$list-bg-color: #ebdcf0;
-$common-element-bg: rgba(255, 255, 255, 0.5);
-
 .board-content {
 	display: flex;
 	overflow-x: auto;

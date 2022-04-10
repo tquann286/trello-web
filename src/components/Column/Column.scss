@@ -1,5 +1,12 @@
 @import '_setting.scss';
 
+$column-header-height: 36px;
+$column-footer-height: 36px;
+$column-border-radius: 5px;
+$card-border-radius: 4px;
+
+$list-bg-color: #ebdcf0;
+
 .column {
 	flex: 0 0 auto;
 	width: 300px;
