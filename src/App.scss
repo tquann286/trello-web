@@ -22,13 +22,6 @@ body {
 	grid-template-rows: 40px 50px 1fr;
 	background-color: $board-bg-color;
 
-	.navbar-board {
-		font-size: 1.1rem;
-		padding-left: $gap;
-		display: flex;
-		align-items: center;
-	}
-
 	.board-columns {
 		display: flex;
 		overflow-x: auto;

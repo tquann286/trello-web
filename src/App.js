@@ -3,12 +3,13 @@ import './App.scss'
 
 // Custom components
 import AppBar from 'components/AppBar/AppBar'
+import BoardBar from 'components/BoardBar/BoardBar'
 
 function App() {
 	return (
 		<div className='trello-trungquandev-master'>
 			<AppBar />
-			<nav className='navbar-board'>Board Bar</nav>
+			<BoardBar />
 			<div className='board-columns'>
 				<div className='column'>
 					<header>BrainStorm</header>
