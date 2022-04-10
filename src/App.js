@@ -8,7 +8,7 @@ function App() {
 	return (
 		<div className='trello-trungquandev-master'>
 			<AppBar />
-			<nav className='navbar board'>Board Bar</nav>
+			<nav className='navbar-board'>Board Bar</nav>
 			<div className='board-columns'>
 				<div className='column'>
 					<header>BrainStorm</header>
