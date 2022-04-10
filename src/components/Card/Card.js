@@ -4,7 +4,7 @@ import './Card.scss'
 
 function Card() {
 	return (
-		<li className='task-item'>
+		<li className='card-item'>
 			<img
 				src='https://i.ytimg.com/vi/vnXvYy_GIGI/hqdefault.jpg?sqp=-oaymwEbCKgBEF5IVfKriqkDDggBFQAAiEIYAXABwAEG&rs=AOn4CLCrwRTvTrUtouhuTLEKIkuezm04jw'
 				alt=''

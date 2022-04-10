@@ -7,12 +7,12 @@ function Column() {
 	return (
 		<div className='column'>
 			<header>BrainStorm</header>
-			<ul className='task-list'>
+			<ul className='card-list'>
 				<Card />
-				<li className='task-item'>Add what you'd to work on below</li>
-				<li className='task-item'>Add what you'd to work on below</li>
-				<li className='task-item'>Add what you'd to work on below</li>
-				<li className='task-item'>Add what you'd to work on below</li>
+				<li className='card-item'>Add what you'd to work on below</li>
+				<li className='card-item'>Add what you'd to work on below</li>
+				<li className='card-item'>Add what you'd to work on below</li>
+				<li className='card-item'>Add what you'd to work on below</li>
 			</ul>
 			<footer>Add another card</footer>
 		</div>
