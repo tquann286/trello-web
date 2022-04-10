@@ -21,7 +21,7 @@ body {
 	grid-template-rows: 40px 50px 1fr;
 	background-color: $board-bg-color;
 
-	.board-columns {
+	.board-content {
 		display: flex;
 		overflow-x: auto;
 		margin: 0 $gap $gap;
