@@ -1,9 +1,9 @@
 @import '_setting.scss';
 
 .board-content {
-	display: flex;
+	height: $board-content-height;
 	overflow-x: auto;
-	margin: 0 $gap $gap;
+	overflow-y: hidden;
 	&::-webkit-scrollbar {
 		-webkit-appearance: none;
 	}
