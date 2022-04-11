@@ -11,9 +11,7 @@ import { initialData } from 'actions/initialData'
 
 function BoardContent() {
 	const [board, setBoard] = useState({})
-	console.log('BoardContent ~ board', board)
 	const [columns, setColumns] = useState({})
-	console.log('BoardContent ~ columns', columns)
 
 	useEffect(() => {
 		const boardFromDB = initialData.boards.find(

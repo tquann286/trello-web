@@ -18,7 +18,7 @@ $list-bg-color: #ebdcf0;
 		color: #333;
 		padding: 0 8px;
 	}
-	header {
+	header.column-drag-handle {
 		padding-left: 15px;
 		height: $column-header-height;
 		line-height: $column-header-height;
@@ -26,6 +26,10 @@ $list-bg-color: #ebdcf0;
 		font-weight: bold;
 		border-top-left-radius: $column-border-radius;
 		border-top-right-radius: $column-border-radius;
+		cursor: grab;
+		&:active {
+			cursor: grabbing;
+		}
 	}
 	footer {
 		padding-left: $gap;
