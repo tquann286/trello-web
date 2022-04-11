@@ -3,10 +3,10 @@ import React from 'react'
 import './Column.scss'
 import Card from 'components/Card/Card'
 
-function Column() {
+function Column({ column }) {
 	return (
 		<div className='column'>
-			<header>BrainStorm</header>
+			<header>{column.title}</header>
 			<ul className='card-list'>
 				<Card />
 				<li className='card-item'>Add what you'd to work on below</li>

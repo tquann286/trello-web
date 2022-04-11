@@ -9,7 +9,9 @@ import { initialData } from 'actions/initialData'
 
 function BoardContent() {
 	const [board, setBoard] = useState({})
+  console.log('BoardContent ~ board', board)
 	const [columns, setColumns] = useState({})
+  console.log('BoardContent ~ columns', columns)
 
 	useEffect(() => {
 		const boardFromDB = initialData.boards.find(
@@ -17,20 +19,22 @@ function BoardContent() {
 		)
 		if (boardFromDB) {
 			setBoard(boardFromDB)
+
+			// Sort column
+			boardFromDB.columns.sort(function(a, b) {
+				return boardFromDB.columnOrder.indexOf(a.id) - boardFromDB.columnOrder.indexOf(b.id)
+			})
+			setColumns(boardFromDB.columns)
 		}
 	}, [])
 
 	if (isEmpty(board)) {
-		return <div className='not-found'>Board not found.</div>
+		return <div className='not-found' style={{padding: '10px', color: 'white'}}>Board not found.</div>
 	}
 
 	return (
 		<div className='board-content'>
-			<Column />
-			<Column />
-			<Column />
-			<Column />
-			<Column />
+			{columns.map((column, index) => <Column key={index} column={column} />)}
 		</div>
 	)
 }
