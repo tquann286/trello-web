@@ -55,5 +55,15 @@ $list-bg-color: #ebdcf0;
 			background-color: darken($list-bg-color, 15);
 			border-right: 5px solid $list-bg-color;
 		}
+
+		.card-ghost {
+			transition: transform 0.18s ease;
+			transform: rotateZ(5deg)
+		}
+		
+		.card-ghost-drop{
+			transition: transform 0.18s ease-in-out;
+			transform: rotateZ(0deg)
+		}
 	}
 }

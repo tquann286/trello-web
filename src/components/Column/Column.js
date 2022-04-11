@@ -26,7 +26,7 @@ function Column({ column }) {
 					// 	console.log('drag leave:', column.id)
 					// }}
 					// onDropReady={(p) => console.log('Drop ready: ', p)}
-					groupName='col'
+					groupName='tq-columns'
 					onDrop={onCardDrop}
 					getChildPayload={(index) => cards[index]}
 					dragClass='card-ghost'
