@@ -11,7 +11,7 @@ li.card-item {
     margin-bottom: $gap;
   }
 }
-img {
+img.card-cover {
   display: block;
   width: calc(100% - 2 * #{$gap});
   margin: -$gap 0 $gap -$gap;

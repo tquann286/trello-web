@@ -2,14 +2,11 @@ import React from 'react'
 
 import './Card.scss'
 
-function Card() {
+function Card({ card }) {
 	return (
 		<li className='card-item'>
-			<img
-				src='https://i.ytimg.com/vi/vnXvYy_GIGI/hqdefault.jpg?sqp=-oaymwEbCKgBEF5IVfKriqkDDggBFQAAiEIYAXABwAEG&rs=AOn4CLCrwRTvTrUtouhuTLEKIkuezm04jw'
-				alt=''
-			/>
-			Title: Trungquandev
+			{card.cover && <img src={card.cover} className='card-cover' alt={card.title} />}
+			{card.title}
 		</li>
 	)
 }
