@@ -17,15 +17,6 @@ function Column({ column }) {
 			<header className='column-drag-handle'>{column.title}</header>
 			<div className='card-list'>
 				<Container
-					// onDragStart={(e) => console.log('drag started', e)}
-					// onDragEnd={(e) => console.log('drag end', e)}
-					// onDragEnter={() => {
-					// 	console.log('drag enter:', column.id)
-					// }}
-					// onDragLeave={() => {
-					// 	console.log('drag leave:', column.id)
-					// }}
-					// onDropReady={(p) => console.log('Drop ready: ', p)}
 					groupName='tq-columns'
 					onDrop={onCardDrop}
 					getChildPayload={(index) => cards[index]}
