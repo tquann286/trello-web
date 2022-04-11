@@ -4,10 +4,10 @@ import './Card.scss'
 
 function Card({ card }) {
 	return (
-		<li className='card-item'>
-			{card.cover && <img src={card.cover} className='card-cover' alt={card.title} />}
+		<div className='card-item'>
+			{card.cover && <img src={card.cover} className='card-cover' alt={card.title} onMouseDown={e => e.preventDefault()} />}
 			{card.title}
-		</li>
+		</div>
 	)
 }
 
