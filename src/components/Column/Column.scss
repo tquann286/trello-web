@@ -39,8 +39,7 @@ $list-bg-color: #ebdcf0;
 		border-bottom-left-radius: $column-border-radius;
 		border-bottom-right-radius: $column-border-radius;
 	}
-	ul.card-list {
-		list-style-type: none;
+	.card-list {
 		margin: 0;
 		max-height: calc(
 			100% - #{$column-header-height} - #{$column-footer-height}

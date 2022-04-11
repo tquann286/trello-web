@@ -42,6 +42,7 @@ function BoardContent() {
 			<Container
 				orientation='horizontal'
 				onDrop={onColumnDrop}
+				getChildPayload={index => columns[index]}
 				dragHandleSelector='.column-drag-handle'
 				dropPlaceholder={{
 					animationDuration: 150,
