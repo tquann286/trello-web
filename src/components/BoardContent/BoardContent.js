@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { Container, Draggable } from 'react-smooth-dnd'
+import { Container as BsContainer, Row, Col, Form } from 'react-bootstrap'
 import { isEmpty } from 'lodash'
 
 import './BoardContent.scss'
@@ -76,9 +77,23 @@ function BoardContent() {
 					</Draggable>
 				))}
 			</Container>
-			<div className='add-new-column'>
-				<i className='fa fa-plus icon' /> Add another column
-			</div>
+			<BsContainer className='trello-container'>
+				<Row>
+					<Col className='add-new-column'>
+						<i className='fa fa-plus icon' /> Add another column
+					</Col>
+				</Row>
+				<Row>
+					<Col className='enter-new-column'>
+						<Form.Control
+							className='input-enter-new-column'
+							size='sm'
+							type='text'
+							placeholder='Enter column title'
+						/>
+					</Col>
+				</Row>
+			</BsContainer>
 		</div>
 	)
 }
