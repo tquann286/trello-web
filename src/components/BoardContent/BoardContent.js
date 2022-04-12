@@ -33,12 +33,17 @@ function BoardContent() {
 			</div>
 		)
 	}
+	console.log(board);
 
 	const onColumnDrop = (dropResult) => {
-		let newColumns =[...columns]
+		let newColumns = [...columns]
 		newColumns = applyDrag(newColumns, dropResult)
+		let newBoard = {... board}
+		newBoard.columnOrder = newColumns.map( col => col.id)
+		newBoard.columns = newColumns
 
 		setColumns(newColumns)
+		setBoard(newBoard)
 	}
 
 	return (
