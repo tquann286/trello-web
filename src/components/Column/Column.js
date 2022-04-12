@@ -9,7 +9,7 @@ function Column({ column }) {
 	const cards = mapOrder(column.cards, column.cardOrder, 'id')
 
 	const onCardDrop = (dropResult) => {
-		console.log(dropResult)
+		// console.log(dropResult)
 	}
 
 	return (

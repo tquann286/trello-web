@@ -6,6 +6,7 @@ import './BoardContent.scss'
 
 import Column from 'components/Column/Column'
 import { mapOrder } from 'utilities/sorts'
+import { applyDrag } from 'utilities/dragDrop'
 
 import { initialData } from 'actions/initialData'
 
@@ -34,7 +35,10 @@ function BoardContent() {
 	}
 
 	const onColumnDrop = (dropResult) => {
-		console.log(dropResult)
+		let newColumns =[...columns]
+		newColumns = applyDrag(newColumns, dropResult)
+
+		setColumns(newColumns)
 	}
 
 	return (
