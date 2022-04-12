@@ -14,7 +14,7 @@ function Column({ column, onCardDrop }) {
 			<div className='card-list'>
 				<Container
 					groupName='tq-columns'
-					onDrop={dropResult => onCardDrop(column.id, dropResult)}
+					onDrop={(dropResult) => onCardDrop(column.id, dropResult)}
 					getChildPayload={(index) => cards[index]}
 					dragClass='card-ghost'
 					dropClass='card-ghost-drop'
@@ -32,7 +32,11 @@ function Column({ column, onCardDrop }) {
 					))}
 				</Container>
 			</div>
-			<footer> <i className='fa fa-plus icon' /> Add another card</footer>
+			<footer>
+				<div className="footer-actions">
+				<i className='fa fa-plus icon' /> Add another card
+				</div>
+			</footer>
 		</div>
 	)
 }
