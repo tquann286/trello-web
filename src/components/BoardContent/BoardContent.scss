@@ -42,4 +42,17 @@
 			background-color: hsla(0, 0%, 100%, 0.34);
 		}
 	}
+	
+	.enter-new-column {
+		background-color: $column-bg-color;
+		width: 250px;
+		max-width	: 250px;
+		line-height: 32px;
+		padding: 4px 10px;
+		margin-left: $gap;
+		border-radius: $column-border-radius;
+		input.input-enter-new-column {
+			margin: 5px 0;
+		}
+	}
 }

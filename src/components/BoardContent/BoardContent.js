@@ -1,6 +1,12 @@
 import React, { useState, useEffect } from 'react'
 import { Container, Draggable } from 'react-smooth-dnd'
-import { Container as BsContainer, Row, Col, Form } from 'react-bootstrap'
+import {
+	Container as BsContainer,
+	Row,
+	Col,
+	Form,
+	Button,
+} from 'react-bootstrap'
 import { isEmpty } from 'lodash'
 
 import './BoardContent.scss'
@@ -91,6 +97,7 @@ function BoardContent() {
 							type='text'
 							placeholder='Enter column title'
 						/>
+						<Button variant='success'>Add column</Button>
 					</Col>
 				</Row>
 			</BsContainer>
