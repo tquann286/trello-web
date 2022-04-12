@@ -37,6 +37,7 @@ $column-height: calc(#{$board-content-height} - #{$gap * 2});
 		font-weight: bold;
 		border-bottom-left-radius: $column-border-radius;
 		border-bottom-right-radius: $column-border-radius;
+    color: #777;
 	}
 	.card-list {
 		margin: 0;

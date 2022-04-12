@@ -32,7 +32,7 @@ function Column({ column, onCardDrop }) {
 					))}
 				</Container>
 			</div>
-			<footer>Add another card</footer>
+			<footer> <i className='fa fa-plus icon' /> Add another card</footer>
 		</div>
 	)
 }
