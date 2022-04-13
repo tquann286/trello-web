@@ -23,6 +23,7 @@ function BoardContent() {
 	const [openNewColumnForm, setOpenNewColumnForm] = useState(false)
 
 	const newColumnInputRef = useRef(null)
+	const [newColumnTitle, setNewColumnTitle] = useState('')
 
 	useEffect(() => {
 		const boardFromDB = initialData.boards.find(
@@ -39,6 +40,7 @@ function BoardContent() {
 	useEffect(() => {
 		if (newColumnInputRef && newColumnInputRef.current) {
 			newColumnInputRef.current.focus()
+			newColumnInputRef.current.select()
 		}
 	}, [openNewColumnForm])
 
@@ -54,7 +56,7 @@ function BoardContent() {
 		let newColumns = [...columns]
 		newColumns = applyDrag(newColumns, dropResult)
 		let newBoard = { ...board }
-		newBoard.columnOrder = newColumns.map((col) => col.id)
+		newBoard.columnOrder = newColumns.map((column) => column.id)
 		newBoard.columns = newColumns
 
 		setColumns(newColumns)
@@ -74,6 +76,37 @@ function BoardContent() {
 	}
 
 	const toggleOpenNewColumnForm = () => setOpenNewColumnForm(!openNewColumnForm)
+
+	const addNewColumn = () => {
+		if (!newColumnTitle) {
+			newColumnInputRef.current.focus()
+			return
+		}
+
+		const newColumnToAdd = {
+			id: Math.random().toString(36).substr(2, 5), // Create 5 random characters
+			boardId: board.id,
+			title: newColumnTitle.trim(),
+			cardOrder: [],
+			cards: [],
+		}
+
+		let newColumns = [...columns]
+		newColumns.push(newColumnToAdd)
+
+		let newBoard = { ...board }
+		newBoard.columnOrder = newColumns.map((column) => column.id)
+		newBoard.columns = newColumns
+
+		setColumns(newColumns)
+		setBoard(newBoard)
+		setNewColumnTitle('')
+		toggleOpenNewColumnForm()
+	}
+
+	const onNewColumnTitleChange = (e) => {
+		setNewColumnTitle(e.target.value)
+	}
 
 	return (
 		<div className='board-content'>
@@ -111,8 +144,15 @@ function BoardContent() {
 								type='text'
 								placeholder='Enter column title'
 								ref={newColumnInputRef}
+								value={newColumnTitle}
+								onChange={onNewColumnTitleChange}
+								onKeyUp={(e) => {
+									if (e.key === 'Enter') addNewColumn()
+								}}
 							/>
-							<Button variant='success'>Add column</Button>
+							<Button variant='success' onClick={addNewColumn}>
+								Add column
+							</Button>
 							<span
 								className='cancel-new-column'
 								onClick={toggleOpenNewColumnForm}
