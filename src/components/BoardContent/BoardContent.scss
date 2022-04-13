@@ -55,4 +55,13 @@
 			margin: 5px 0;
 		}
 	}
+
+	span.cancel-new-column {
+		margin-left: $gap;
+		cursor: pointer;
+		i {
+			color: $alert-danger;
+			font-size: 18px;
+		}
+	}
 }

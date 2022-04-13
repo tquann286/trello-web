@@ -98,6 +98,9 @@ function BoardContent() {
 							placeholder='Enter column title'
 						/>
 						<Button variant='success'>Add column</Button>
+						<span className="cancel-new-column">
+							<i className='fa fa-trash icon' />
+						</span>
 					</Col>
 				</Row>
 			</BsContainer>
