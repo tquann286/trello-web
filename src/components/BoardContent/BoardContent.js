@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import { Container, Draggable } from 'react-smooth-dnd'
 import {
 	Container as BsContainer,
@@ -20,6 +20,9 @@ import { initialData } from 'actions/initialData'
 function BoardContent() {
 	const [board, setBoard] = useState({})
 	const [columns, setColumns] = useState({})
+	const [openNewColumnForm, setOpenNewColumnForm] = useState(false)
+
+	const newColumnInputRef = useRef(null)
 
 	useEffect(() => {
 		const boardFromDB = initialData.boards.find(
@@ -32,6 +35,12 @@ function BoardContent() {
 			setColumns(mapOrder(boardFromDB.columns, boardFromDB.columnOrder, 'id'))
 		}
 	}, [])
+
+	useEffect(() => {
+		if (newColumnInputRef && newColumnInputRef.current) {
+			newColumnInputRef.current.focus()
+		}
+	}, [openNewColumnForm])
 
 	if (isEmpty(board)) {
 		return (
@@ -64,6 +73,8 @@ function BoardContent() {
 		}
 	}
 
+	const toggleOpenNewColumnForm = () => setOpenNewColumnForm(!openNewColumnForm)
+
 	return (
 		<div className='board-content'>
 			<Container
@@ -84,25 +95,33 @@ function BoardContent() {
 				))}
 			</Container>
 			<BsContainer className='trello-container'>
-				<Row>
-					<Col className='add-new-column'>
-						<i className='fa fa-plus icon' /> Add another column
-					</Col>
-				</Row>
-				<Row>
-					<Col className='enter-new-column'>
-						<Form.Control
-							className='input-enter-new-column'
-							size='sm'
-							type='text'
-							placeholder='Enter column title'
-						/>
-						<Button variant='success'>Add column</Button>
-						<span className="cancel-new-column">
-							<i className='fa fa-trash icon' />
-						</span>
-					</Col>
-				</Row>
+				{!openNewColumnForm && (
+					<Row>
+						<Col className='add-new-column' onClick={toggleOpenNewColumnForm}>
+							<i className='fa fa-plus icon' /> Add another column
+						</Col>
+					</Row>
+				)}
+				{openNewColumnForm && (
+					<Row>
+						<Col className='enter-new-column'>
+							<Form.Control
+								className='input-enter-new-column'
+								size='sm'
+								type='text'
+								placeholder='Enter column title'
+								ref={newColumnInputRef}
+							/>
+							<Button variant='success'>Add column</Button>
+							<span
+								className='cancel-new-column'
+								onClick={toggleOpenNewColumnForm}
+							>
+								<i className='fa fa-trash icon' />
+							</span>
+						</Col>
+					</Row>
+				)}
 			</BsContainer>
 		</div>
 	)
