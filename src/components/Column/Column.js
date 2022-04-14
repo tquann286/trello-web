@@ -1,5 +1,6 @@
 import React from 'react'
 import { Container, Draggable } from 'react-smooth-dnd'
+import { Dropdown } from 'bootstrap'
 
 import './Column.scss'
 import Card from 'components/Card/Card'
@@ -10,7 +11,22 @@ function Column({ column, onCardDrop }) {
 
 	return (
 		<div className='column'>
-			<header className='column-drag-handle'>{column.title}</header>
+			<header className='column-drag-handle'>
+				<div className='column-title'>{column.title}</div>
+				<div className='column-dropdown-actions'>
+					<Dropdown>
+						<Dropdown.Toggle variant='success' id='dropdown-basic'>
+							Dropdown Button
+						</Dropdown.Toggle>
+
+						<Dropdown.Menu>
+							<Dropdown.Item href='#/action-1'>Action</Dropdown.Item>
+							<Dropdown.Item href='#/action-2'>Another action</Dropdown.Item>
+							<Dropdown.Item href='#/action-3'>Something else</Dropdown.Item>
+						</Dropdown.Menu>
+					</Dropdown>
+				</div>
+			</header>
 			<div className='card-list'>
 				<Container
 					groupName='tq-columns'
@@ -33,8 +49,8 @@ function Column({ column, onCardDrop }) {
 				</Container>
 			</div>
 			<footer>
-				<div className="footer-actions">
-				<i className='fa fa-plus icon' /> Add another card
+				<div className='footer-actions'>
+					<i className='fa fa-plus icon' /> Add another card
 				</div>
 			</footer>
 		</div>
