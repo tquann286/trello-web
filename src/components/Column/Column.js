@@ -1,6 +1,6 @@
 import React from 'react'
 import { Container, Draggable } from 'react-smooth-dnd'
-import { Dropdown } from 'bootstrap'
+import { Dropdown } from 'react-bootstrap'
 
 import './Column.scss'
 import Card from 'components/Card/Card'
