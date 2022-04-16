@@ -15,6 +15,7 @@ $column-height: calc(#{$board-content-height} - #{$gap * 2});
 		padding: 0 8px;
 	}
 	header.column-drag-handle {
+		display: flex;
 		padding-left: 15px;
 		height: $column-header-height;
 		line-height: $column-header-height;
@@ -25,6 +26,12 @@ $column-height: calc(#{$board-content-height} - #{$gap * 2});
 		cursor: grab;
 		&:active {
 			cursor: grabbing;
+		}
+		.culumn-title {
+flex: 90%;
+		}
+		.column-dropdown-actions {
+flex: 10%;
 		}
 	}
 	footer {
