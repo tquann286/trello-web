@@ -16,7 +16,7 @@ $column-height: calc(#{$board-content-height} - #{$gap * 2});
 	}
 	header.column-drag-handle {
 		display: flex;
-		padding-left: 15px;
+		padding: 5px 8px;
 		height: $column-header-height;
 		line-height: $column-header-height;
 		font-size: 16px;
@@ -32,21 +32,26 @@ $column-height: calc(#{$board-content-height} - #{$gap * 2});
 		}
 		.column-dropdown-actions {
 			flex: 10%;
-			button.dropdown-btn {
-				font-size: 16px;
-				font-weight: bold;
-				letter-spacing: 1px;
-				color: $app-main-text-color;
-				&::after {
-					content: '...';
-					border: none;
-				}
-				.dropdown-menu {
-					padding: 0;
-					min-width: 200px;
-					
+			.dropdown {
+				button.dropdown-btn {
+					height: 32px;
+					line-height: 0;
+					font-size: 16px;
+					font-weight: bold;
+					letter-spacing: 1px;
+					color: $app-main-text-color;
+					margin-top: -8px;
+					&::after {
+						content: '...';
+						border: none;
+					}
+					.dropdown-menu {
+						padding: 0;
+						min-width: 200px;
+					}
 				}
 			}
+
 			a.dropdown-item {
 				padding: 0.1rem 1rem;
 				font-size: 14px;

@@ -29,7 +29,6 @@ function Column({ column, onCardDrop, board, setBoard }) {
 		<div className='column'>
 			<header className='column-drag-handle'>
 				<div className='column-title'>
-					{column.title}
 					<Form.Control
 						className='trello-content-editable'
 						size='sm'

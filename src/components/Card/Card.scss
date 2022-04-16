@@ -13,6 +13,11 @@ $card-border-radius: 4px;
     cursor: grabbing;
   }
 }
+.smooth-dnd-draggable-wrapper {
+  &:first-child {
+    margin-top: 8px;
+  }
+}
 img.card-cover {
   display: block;
   width: calc(100% - 2 * #{$gap});
