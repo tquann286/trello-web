@@ -37,7 +37,7 @@ body {
 		box-shadow: none;
 	}
 	.btn:focus, .btn:active {
-		outline: none;
-		box-shadow: none;
+		outline: none !important;
+		box-shadow: none !important;
 	}
 }
