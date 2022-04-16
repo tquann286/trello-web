@@ -1,12 +1,12 @@
 import React, { useState } from 'react'
 import { Container, Draggable } from 'react-smooth-dnd'
-import { Dropdown } from 'react-bootstrap'
+import { Dropdown, Form } from 'react-bootstrap'
 
 import './Column.scss'
 import Card from 'components/Card/Card'
 import ConfirmModal from 'components/Common/ConfirmModal'
 import { mapOrder } from 'utilities/sorts'
-import { MODAL_ACTION_CONFIRM} from 'utilities/constants'
+import { MODAL_ACTION_CONFIRM } from 'utilities/constants'
 
 function Column({ column, onCardDrop, board, setBoard }) {
 	const cards = mapOrder(column.cards, column.cardOrder, 'id')
@@ -18,8 +18,8 @@ function Column({ column, onCardDrop, board, setBoard }) {
 	const onConfirmModalAction = (type) => {
 		if (type === MODAL_ACTION_CONFIRM) {
 			let newBoard = { ...board }
-			newBoard.columns = newBoard.columns.filter(col => col.id !== column.id)
-			newBoard.columnOrder = newBoard.columns.map(col => col.id)
+			newBoard.columns = newBoard.columns.filter((col) => col.id !== column.id)
+			newBoard.columnOrder = newBoard.columns.map((col) => col.id)
 			setBoard(newBoard)
 		}
 		toggleShowConfirmModal()
@@ -28,7 +28,19 @@ function Column({ column, onCardDrop, board, setBoard }) {
 	return (
 		<div className='column'>
 			<header className='column-drag-handle'>
-				<div className='column-title'>{column.title}</div>
+				<div className='column-title'>
+					{column.title}
+					<Form.Control
+						className='trello-content-editable'
+						size='sm'
+						type='text'
+						value={column.title}
+						// onChange={handleColumnTitleChange}
+						// onKeyUp={(e) => {
+						// 	if (e.key === 'Enter') addNewColumn()
+						// }}
+					/>
+				</div>
 				<div className='column-dropdown-actions'>
 					<Dropdown>
 						<Dropdown.Toggle className='dropdown-btn' variant='' size='sm' />
