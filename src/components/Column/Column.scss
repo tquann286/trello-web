@@ -41,6 +41,18 @@ $column-height: calc(#{$board-content-height} - #{$gap * 2});
 					content: '...';
 					border: none;
 				}
+				.dropdown-menu {
+					padding: 0;
+					min-width: 200px;
+					
+				}
+			}
+			a.dropdown-item {
+				padding: 0.1rem 1rem;
+				font-size: 14px;
+				&:not(:last-child) {
+					border-bottom: 1px solid #ebdcf0;
+				}
 			}
 		}
 	}
