@@ -6,9 +6,13 @@ import './Column.scss'
 import Card from 'components/Card/Card'
 import ConfirmModal from 'components/Common/ConfirmModal'
 import { mapOrder } from 'utilities/sorts'
+import {
+	handleOnEnterDown,
+	onSelectALlInlineText,
+} from 'utilities/ContentEditable'
 import { MODAL_ACTION_CONFIRM } from 'utilities/constants'
 
-function Column({ column, onCardDrop, board, setBoard }) {
+function Column({ column, onCardDrop, onUpdateColumn }) {
 	const cards = mapOrder(column.cards, column.cardOrder, 'id')
 
 	const [showConfirmModal, SetShowConfirmModal] = useState(false)
@@ -18,26 +22,16 @@ function Column({ column, onCardDrop, board, setBoard }) {
 
 	const onConfirmModalAction = (type) => {
 		if (type === MODAL_ACTION_CONFIRM) {
-			let newBoard = { ...board }
-			newBoard.columns = newBoard.columns.filter((col) => col.id !== column.id)
-			newBoard.columnOrder = newBoard.columns.map((col) => col.id)
-			setBoard(newBoard)
+			const newColumn = { ...column, _detroy: true }
 		}
 		toggleShowConfirmModal()
-	}
-
-	const onSelectALlInlineText = (e) => {
-		e.target.select() 
-		// or: document.execCommand('selectAll', false, null) (This feature is no longer recommended. Though some browsers might still support it)
 	}
 
 	const handleColumnTitleChange = (e) => {
 		setColumnTitle(e.target.value)
 	}
 
-	const handleColumnTitleBlur = (e) => {
-		console.log(columnTitle);
-	}
+	const handleColumnTitleBlur = (e) => {}
 
 	return (
 		<div className='column'>
@@ -51,10 +45,8 @@ function Column({ column, onCardDrop, board, setBoard }) {
 						onChange={handleColumnTitleChange}
 						onBlur={handleColumnTitleBlur}
 						onClick={onSelectALlInlineText}
-						onMouseDown={e => e.preventDefault()}
-						onKeyUp={(e) => {
-							if (e.key === 'Enter') e.target.blur()
-						}}
+						onMouseDown={(e) => e.preventDefault()}
+						onKeyUp={(e) => handleOnEnterDown(e, 'blur')}
 						spellCheck='false'
 					/>
 				</div>

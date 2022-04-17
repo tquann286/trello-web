@@ -108,6 +108,10 @@ function BoardContent() {
 		setNewColumnTitle(e.target.value)
 	}
 
+	const onUpdateColumn = (newColumnToUpdate) => {
+		console.log(newColumnToUpdate);
+	}
+
 	return (
 		<div className='board-content'>
 			<Container
@@ -123,8 +127,7 @@ function BoardContent() {
 			>
 				{columns.map((column, index) => (
 					<Draggable key={index}>
-						<Column column={column} onCardDrop={onCardDrop} board={board}
-						setBoard={setBoard} />
+						<Column column={column} onCardDrop={onCardDrop} onUpdateColumn={onUpdateColumn} />
 					</Draggable>
 				))}
 			</Container>
