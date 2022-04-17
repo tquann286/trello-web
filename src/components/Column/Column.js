@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Container, Draggable } from 'react-smooth-dnd'
 import { Dropdown, Form } from 'react-bootstrap'
 
@@ -16,13 +16,18 @@ function Column({ column, onCardDrop, onUpdateColumn }) {
 	const cards = mapOrder(column.cards, column.cardOrder, 'id')
 
 	const [showConfirmModal, SetShowConfirmModal] = useState(false)
-	const [columnTitle, setColumnTitle] = useState(column.title)
+	const [columnTitle, setColumnTitle] = useState('')
+
+	useEffect(() => {
+		setColumnTitle(column.title)
+	}, [column.title])
 
 	const toggleShowConfirmModal = () => SetShowConfirmModal(!showConfirmModal)
 
 	const onConfirmModalAction = (type) => {
 		if (type === MODAL_ACTION_CONFIRM) {
 			const newColumn = { ...column, _detroy: true }
+			onUpdateColumn(newColumn)
 		}
 		toggleShowConfirmModal()
 	}
@@ -31,7 +36,10 @@ function Column({ column, onCardDrop, onUpdateColumn }) {
 		setColumnTitle(e.target.value)
 	}
 
-	const handleColumnTitleBlur = (e) => {}
+	const handleColumnTitleBlur = (e) => {
+		const newColumn = { ...column, title: columnTitle }
+		onUpdateColumn(newColumn)
+	}
 
 	return (
 		<div className='column'>
