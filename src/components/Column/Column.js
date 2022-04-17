@@ -12,6 +12,7 @@ function Column({ column, onCardDrop, board, setBoard }) {
 	const cards = mapOrder(column.cards, column.cardOrder, 'id')
 
 	const [showConfirmModal, SetShowConfirmModal] = useState(false)
+	const [columnTitle, setColumnTitle] = useState(column.title)
 
 	const toggleShowConfirmModal = () => SetShowConfirmModal(!showConfirmModal)
 
@@ -25,6 +26,19 @@ function Column({ column, onCardDrop, board, setBoard }) {
 		toggleShowConfirmModal()
 	}
 
+	const onSelectALlInlineText = (e) => {
+		e.target.select() 
+		// or: document.execCommand('selectAll', false, null) (This feature is no longer recommended. Though some browsers might still support it)
+	}
+
+	const handleColumnTitleChange = (e) => {
+		setColumnTitle(e.target.value)
+	}
+
+	const handleColumnTitleBlur = (e) => {
+		console.log(columnTitle);
+	}
+
 	return (
 		<div className='column'>
 			<header className='column-drag-handle'>
@@ -33,11 +47,15 @@ function Column({ column, onCardDrop, board, setBoard }) {
 						className='trello-content-editable'
 						size='sm'
 						type='text'
-						value={column.title}
-						// onChange={handleColumnTitleChange}
-						// onKeyUp={(e) => {
-						// 	if (e.key === 'Enter') addNewColumn()
-						// }}
+						value={columnTitle}
+						onChange={handleColumnTitleChange}
+						onBlur={handleColumnTitleBlur}
+						onClick={onSelectALlInlineText}
+						onMouseDown={e => e.preventDefault()}
+						onKeyUp={(e) => {
+							if (e.key === 'Enter') e.target.blur()
+						}}
+						spellCheck='false'
 					/>
 				</div>
 				<div className='column-dropdown-actions'>
