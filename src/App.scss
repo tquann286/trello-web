@@ -30,7 +30,6 @@ body {
 		cursor: pointer;
 		&:focus {
 			background-color: #f9f9f9;
-			border: 1px solid $input-border-color;
 		}
 	}
 
@@ -58,7 +57,9 @@ body {
 	[type=email].form-control:focus, 
 	[type=tel].form-control:focus, 
 	[contenteditable].form-control:focus {
+		transition: 0.1s;
 		box-shadow: none;
+		border: 1px solid $input-border-color;
 	}
 	.btn:focus, .btn:active {
 		outline: none !important;

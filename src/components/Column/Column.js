@@ -94,7 +94,7 @@ function Column({ column, onCardDrop, onUpdateColumn }) {
 				</Container>
 				<div className='add-new-card-area'>
 					<Form.Control
-						className='input-enter-new-column'
+						className='textarea-enter-new-column'
 						size='sm'
 						as='textarea'
 						rows='3'
