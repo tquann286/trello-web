@@ -1,10 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { Container, Draggable } from 'react-smooth-dnd'
-<<<<<<< HEAD
-import { Dropdown } from 'react-bootstrap'
-=======
 import { Dropdown, Form } from 'react-bootstrap'
->>>>>>> edit_remove_column
 
 import './Column.scss'
 import Card from 'components/Card/Card'
@@ -48,19 +44,6 @@ function Column({ column, onCardDrop, onUpdateColumn }) {
 	return (
 		<div className='column'>
 			<header className='column-drag-handle'>
-<<<<<<< HEAD
-				<div className='column-title'>{column.title}</div>
-				<div className='column-dropdown-actions'>
-					<Dropdown>
-						<Dropdown.Toggle variant='success' id='dropdown-basic'>
-							Dropdown Button
-						</Dropdown.Toggle>
-
-						<Dropdown.Menu>
-							<Dropdown.Item href='#/action-1'>Action</Dropdown.Item>
-							<Dropdown.Item href='#/action-2'>Another action</Dropdown.Item>
-							<Dropdown.Item href='#/action-3'>Something else</Dropdown.Item>
-=======
 				<div className='column-title'>
 					<Form.Control
 						className='trello-content-editable'
@@ -85,7 +68,6 @@ function Column({ column, onCardDrop, onUpdateColumn }) {
 							</Dropdown.Item>
 							<Dropdown.Item>Move All Cards (beta)</Dropdown.Item>
 							<Dropdown.Item>Archive All Cards (beta)</Dropdown.Item>
->>>>>>> edit_remove_column
 						</Dropdown.Menu>
 					</Dropdown>
 				</div>
