@@ -58,16 +58,4 @@
 			}
 		}
 	}
-
-	span.cancel-new-column {
-		margin-left: $gap;
-		cursor: pointer;
-		i {
-			color: $alert-danger;
-			font-size: 18px;
-			&:hover {
-				color: darken($alert-danger, 10);
-			}
-		}
-	}
 }

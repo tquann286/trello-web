@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { Container, Draggable } from 'react-smooth-dnd'
-import { Dropdown, Form } from 'react-bootstrap'
+import { Dropdown, Form, Button } from 'react-bootstrap'
 
 import './Column.scss'
 import Card from 'components/Card/Card'
@@ -92,6 +92,27 @@ function Column({ column, onCardDrop, onUpdateColumn }) {
 						</Draggable>
 					))}
 				</Container>
+				<div className='add-new-card-area'>
+					<Form.Control
+						className='input-enter-new-column'
+						size='sm'
+						as='textarea'
+						rows='3'
+						placeholder='Enter card title...'
+						// ref={newColumnInputRef}
+						// value={newColumnTitle}
+						// onChange={onNewColumnTitleChange}
+						// onKeyUp={(e) => {
+						// 	if (e.key === 'Enter') addNewColumn()
+						// }}
+					/>
+					<Button variant='success'>
+						Add column
+					</Button>
+					<span className='cancel-icon'>
+						<i className='fa fa-trash icon' />
+					</span>
+				</div>
 			</div>
 			<footer>
 				<div className='footer-actions'>

@@ -168,7 +168,7 @@ function BoardContent() {
 								className='input-enter-new-column'
 								size='sm'
 								type='text'
-								placeholder='Enter column title'
+								placeholder='Enter column title...'
 								ref={newColumnInputRef}
 								value={newColumnTitle}
 								onChange={onNewColumnTitleChange}
@@ -180,7 +180,7 @@ function BoardContent() {
 								Add column
 							</Button>
 							<span
-								className='cancel-new-column'
+								className='cancel-icon'
 								onClick={toggleOpenNewColumnForm}
 							>
 								<i className='fa fa-trash icon' />

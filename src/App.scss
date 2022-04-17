@@ -34,6 +34,18 @@ body {
 		}
 	}
 
+	span.cancel-icon {
+		margin-left: $gap;
+		cursor: pointer;
+		i {
+			color: $alert-danger;
+			font-size: 18px;
+			&:hover {
+				color: darken($alert-danger, 10);
+			}
+		}
+	}
+
 	textarea:focus, 
 	textarea.form-control:focus, 
 	input.form-control:focus, 
