@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import { Container, Draggable } from 'react-smooth-dnd'
 import { Dropdown, Form, Button } from 'react-bootstrap'
 
@@ -17,12 +17,27 @@ function Column({ column, onCardDrop, onUpdateColumn }) {
 
 	const [showConfirmModal, SetShowConfirmModal] = useState(false)
 	const [columnTitle, setColumnTitle] = useState('')
+
 	const [openNewCardForm, setOpenNewCardForm] = useState(false)
 	const toggleOpenNewCardForm = () => setOpenNewCardForm(!openNewCardForm)
+
+	const [newCardTitle, setNewCardTitle] = useState('')
+	const onNewCardTitleChange = (e) => {
+		setNewCardTitle(e.target.value)
+	}
+
+	const newCardTextareaRef = useRef(null)
 
 	useEffect(() => {
 		setColumnTitle(column.title)
 	}, [column.title])
+
+	useEffect(() => {
+		if (newCardTextareaRef && newCardTextareaRef.current) {
+			newCardTextareaRef.current.focus()
+			newCardTextareaRef.current.select()
+		}
+	}, [openNewCardForm])
 
 	const toggleShowConfirmModal = () => SetShowConfirmModal(!showConfirmModal)
 
@@ -41,6 +56,22 @@ function Column({ column, onCardDrop, onUpdateColumn }) {
 	const handleColumnTitleBlur = (e) => {
 		const newColumn = { ...column, title: columnTitle }
 		onUpdateColumn(newColumn)
+	}
+	console.log(column);
+
+	const addNewCard = () => {
+		if (!newCardTitle) {
+			newCardTextareaRef.current.focus()
+			return
+		}
+
+		const newCardToAdd = {
+			id: Math.random().toString(36).substr(2, 5), // Create 5 random characters
+			// boardId: board.id,
+			title: newCardTitle.trim(),
+			cardOrder: [],
+			cards: [],
+		}
 	}
 
 	return (
@@ -97,30 +128,33 @@ function Column({ column, onCardDrop, onUpdateColumn }) {
 				{openNewCardForm && (
 					<div className='add-new-card-area'>
 						<Form.Control
-							className='textarea-enter-new-column'
+							className='textarea-enter-new-card'
 							size='sm'
 							as='textarea'
 							rows='3'
 							placeholder='Enter card title...'
-							// ref={newColumnInputRef}
-							// value={newColumnTitle}
-							// onChange={onNewColumnTitleChange}
-							// onKeyUp={(e) => {
-							// 	if (e.key === 'Enter') addNewColumn()
-							// }}
+							ref={newCardTextareaRef}
+							value={newCardTitle}
+							onChange={onNewCardTitleChange}
+							onKeyUp={(e) => {
+								if (e.key === 'Enter') addNewCard()
+							}}
 						/>
-						<Button variant='success'>Add column</Button>
-						<span className='cancel-icon' onClick={toggleOpenNewCardForm}>
-							<i className='fa fa-trash icon' />
-						</span>
 					</div>
 				)}
 			</div>
 			<footer>
-				{!openNewCardForm && (
+				{!openNewCardForm ? (
 					<div className='footer-actions' onClick={toggleOpenNewCardForm}>
 						<i className='fa fa-plus icon' /> Add another card
 					</div>
+				) : (
+					<React.Fragment>
+						<Button size='sm' onClick={addNewCard}>Add card</Button>
+						<span className='cancel-icon' onClick={toggleOpenNewCardForm}>
+							<i className='fa fa-trash icon' />
+						</span>
+					</React.Fragment>
 				)}
 			</footer>
 

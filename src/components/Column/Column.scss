@@ -115,10 +115,10 @@ $column-height: calc(#{$board-content-height} - #{$gap * 2});
 
 		.add-new-card-area {
 
-			.textarea-enter-new-column {
+			.textarea-enter-new-card {
 				min-height: 54px;
 				max-height: 162px;
-				margin-bottom: $gap;
+				margin-bottom: 5px;
 			}
 		}
 	}

@@ -25,6 +25,9 @@ function BoardContent() {
 
 	const newColumnInputRef = useRef(null)
 	const [newColumnTitle, setNewColumnTitle] = useState('')
+	const onNewColumnTitleChange = (e) => {
+		setNewColumnTitle(e.target.value)
+	}
 
 	useEffect(() => {
 		const boardFromDB = initialData.boards.find(
@@ -103,9 +106,6 @@ function BoardContent() {
 		toggleOpenNewColumnForm()
 	}
 
-	const onNewColumnTitleChange = (e) => {
-		setNewColumnTitle(e.target.value)
-	}
 
 	const onUpdateColumn = (newColumnToUpdate) => {
 		const columnIdToUpdate = newColumnToUpdate.id
