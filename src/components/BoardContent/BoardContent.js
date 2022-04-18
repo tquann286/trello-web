@@ -21,6 +21,7 @@ function BoardContent() {
 	const [board, setBoard] = useState({})
 	const [columns, setColumns] = useState({})
 	const [openNewColumnForm, setOpenNewColumnForm] = useState(false)
+	const toggleOpenNewColumnForm = () => setOpenNewColumnForm(!openNewColumnForm)
 
 	const newColumnInputRef = useRef(null)
 	const [newColumnTitle, setNewColumnTitle] = useState('')
@@ -74,8 +75,6 @@ function BoardContent() {
 			setColumns(newColumns)
 		}
 	}
-
-	const toggleOpenNewColumnForm = () => setOpenNewColumnForm(!openNewColumnForm)
 
 	const addNewColumn = () => {
 		if (!newColumnTitle) {
