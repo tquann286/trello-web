@@ -21,9 +21,13 @@ function BoardContent() {
 	const [board, setBoard] = useState({})
 	const [columns, setColumns] = useState({})
 	const [openNewColumnForm, setOpenNewColumnForm] = useState(false)
+	const toggleOpenNewColumnForm = () => setOpenNewColumnForm(!openNewColumnForm)
 
 	const newColumnInputRef = useRef(null)
 	const [newColumnTitle, setNewColumnTitle] = useState('')
+	const onNewColumnTitleChange = (e) => {
+		setNewColumnTitle(e.target.value)
+	}
 
 	useEffect(() => {
 		const boardFromDB = initialData.boards.find(
@@ -75,8 +79,6 @@ function BoardContent() {
 		}
 	}
 
-	const toggleOpenNewColumnForm = () => setOpenNewColumnForm(!openNewColumnForm)
-
 	const addNewColumn = () => {
 		if (!newColumnTitle) {
 			newColumnInputRef.current.focus()
@@ -104,10 +106,6 @@ function BoardContent() {
 		toggleOpenNewColumnForm()
 	}
 
-	const onNewColumnTitleChange = (e) => {
-		setNewColumnTitle(e.target.value)
-	}
-
 	const onUpdateColumn = (newColumnToUpdate) => {
 		const columnIdToUpdate = newColumnToUpdate.id
 
@@ -121,7 +119,7 @@ function BoardContent() {
 		} else {
 			newColumns.splice(columnIndexToUpdate, 1, newColumnToUpdate)
 		}
-		
+
 		let newBoard = { ...board }
 		newBoard.columnOrder = newColumns.map((column) => column.id)
 		newBoard.columns = newColumns
@@ -154,21 +152,20 @@ function BoardContent() {
 				))}
 			</Container>
 			<BsContainer className='trello-container'>
-				{!openNewColumnForm && (
+				{!openNewColumnForm ? (
 					<Row>
 						<Col className='add-new-column' onClick={toggleOpenNewColumnForm}>
 							<i className='fa fa-plus icon' /> Add another column
 						</Col>
 					</Row>
-				)}
-				{openNewColumnForm && (
+				) : (
 					<Row>
 						<Col className='enter-new-column'>
 							<Form.Control
 								className='input-enter-new-column'
 								size='sm'
 								type='text'
-								placeholder='Enter column title'
+								placeholder='Enter column title...'
 								ref={newColumnInputRef}
 								value={newColumnTitle}
 								onChange={onNewColumnTitleChange}
@@ -179,10 +176,7 @@ function BoardContent() {
 							<Button variant='success' onClick={addNewColumn}>
 								Add column
 							</Button>
-							<span
-								className='cancel-new-column'
-								onClick={toggleOpenNewColumnForm}
-							>
+							<span className='cancel-icon' onClick={toggleOpenNewColumnForm}>
 								<i className='fa fa-trash icon' />
 							</span>
 						</Col>

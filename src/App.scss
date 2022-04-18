@@ -30,7 +30,18 @@ body {
 		cursor: pointer;
 		&:focus {
 			background-color: #f9f9f9;
-			border: 1px solid $input-border-color;
+		}
+	}
+
+	span.cancel-icon {
+		margin-left: $gap;
+		cursor: pointer;
+		i {
+			color: $alert-danger;
+			font-size: 18px;
+			&:hover {
+				color: darken($alert-danger, 10);
+			}
 		}
 	}
 
@@ -46,7 +57,9 @@ body {
 	[type=email].form-control:focus, 
 	[type=tel].form-control:focus, 
 	[contenteditable].form-control:focus {
+		transition: 0.1s;
 		box-shadow: none;
+		border: 1px solid $input-border-color;
 	}
 	.btn:focus, .btn:active {
 		outline: none !important;
