@@ -106,7 +106,6 @@ function BoardContent() {
 		toggleOpenNewColumnForm()
 	}
 
-
 	const onUpdateColumn = (newColumnToUpdate) => {
 		const columnIdToUpdate = newColumnToUpdate.id
 
@@ -120,7 +119,7 @@ function BoardContent() {
 		} else {
 			newColumns.splice(columnIndexToUpdate, 1, newColumnToUpdate)
 		}
-		
+
 		let newBoard = { ...board }
 		newBoard.columnOrder = newColumns.map((column) => column.id)
 		newBoard.columns = newColumns
@@ -153,14 +152,13 @@ function BoardContent() {
 				))}
 			</Container>
 			<BsContainer className='trello-container'>
-				{!openNewColumnForm && (
+				{!openNewColumnForm ? (
 					<Row>
 						<Col className='add-new-column' onClick={toggleOpenNewColumnForm}>
 							<i className='fa fa-plus icon' /> Add another column
 						</Col>
 					</Row>
-				)}
-				{openNewColumnForm && (
+				) : (
 					<Row>
 						<Col className='enter-new-column'>
 							<Form.Control
@@ -178,10 +176,7 @@ function BoardContent() {
 							<Button variant='success' onClick={addNewColumn}>
 								Add column
 							</Button>
-							<span
-								className='cancel-icon'
-								onClick={toggleOpenNewColumnForm}
-							>
+							<span className='cancel-icon' onClick={toggleOpenNewColumnForm}>
 								<i className='fa fa-trash icon' />
 							</span>
 						</Col>

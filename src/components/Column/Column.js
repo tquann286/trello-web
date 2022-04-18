@@ -57,7 +57,6 @@ function Column({ column, onCardDrop, onUpdateColumn }) {
 		const newColumn = { ...column, title: columnTitle }
 		onUpdateColumn(newColumn)
 	}
-	console.log(column);
 
 	const addNewCard = () => {
 		if (!newCardTitle) {
@@ -66,12 +65,13 @@ function Column({ column, onCardDrop, onUpdateColumn }) {
 		}
 
 		const newCardToAdd = {
+			boardId: column.boardId,
+			columnId: column.id,
 			id: Math.random().toString(36).substr(2, 5), // Create 5 random characters
-			// boardId: board.id,
 			title: newCardTitle.trim(),
-			cardOrder: [],
-			cards: [],
+			cover: null,
 		}
+		console.log(newCardToAdd);
 	}
 
 	return (
