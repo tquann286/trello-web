@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react'
 import { Container, Draggable } from 'react-smooth-dnd'
 import { Dropdown, Form, Button } from 'react-bootstrap'
+import { cloneDeep } from 'lodash'
 
 import './Column.scss'
 import Card from 'components/Card/Card'
@@ -71,8 +72,16 @@ function Column({ column, onCardDrop, onUpdateColumn }) {
 			title: newCardTitle.trim(),
 			cover: null,
 		}
-		console.log(newCardToAdd);
+		let newColumn = cloneDeep(column)
+		newColumn.cards.push(newCardToAdd)
+		newColumn.cardOrder.push(newCardToAdd.id)
+
+		onUpdateColumn(newColumn)
+		setNewCardTitle('')
+		toggleOpenNewCardForm()
 	}
+
+
 
 	return (
 		<div className='column'>
