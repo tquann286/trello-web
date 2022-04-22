@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react'
+import './BoardContent.scss'
 import { Container, Draggable } from 'react-smooth-dnd'
 import {
 	Container as BsContainer,
@@ -9,13 +10,12 @@ import {
 } from 'react-bootstrap'
 import { isEmpty } from 'lodash'
 
-import './BoardContent.scss'
-
 import Column from 'components/Column/Column'
 import { mapOrder } from 'utilities/sorts'
 import { applyDrag } from 'utilities/dragDrop'
 
 import { initialData } from 'actions/initialData'
+import { fetchBoardDetails } from 'actions/ApiCall'
 
 function BoardContent() {
 	const [board, setBoard] = useState({})
@@ -33,12 +33,13 @@ function BoardContent() {
 		const boardFromDB = initialData.boards.find(
 			(board) => board.id === 'board-1'
 		)
-		if (boardFromDB) {
+		const boardId = '62617632e89b1220b86c4de4'
+		fetchBoardDetails(boardId).then(board => {
 			setBoard(boardFromDB)
 
 			// Sort column
-			setColumns(mapOrder(boardFromDB.columns, boardFromDB.columnOrder, 'id'))
-		}
+			setColumns(mapOrder(board.columns, board.columnOrder, 'id'))
+		})
 	}, [])
 
 	useEffect(() => {
