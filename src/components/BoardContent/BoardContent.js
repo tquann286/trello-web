@@ -14,7 +14,7 @@ import Column from 'components/Column/Column'
 import { mapOrder } from 'utilities/sorts'
 import { applyDrag } from 'utilities/dragDrop'
 
-import { fetchBoardDetails } from 'actions/ApiCall'
+import { fetchBoardDetails, createNewColumn } from 'actions/ApiCall'
 
 function BoardContent() {
 	const [board, setBoard] = useState({})
@@ -83,24 +83,24 @@ function BoardContent() {
 		}
 
 		const newColumnToAdd = {
-			id: Math.random().toString(36).substr(2, 5), // Create 5 random characters
 			boardId: board._id,
-			title: newColumnTitle.trim(),
-			cardOrder: [],
-			cards: [],
+			title: newColumnTitle,
 		}
-
-		let newColumns = [...columns]
-		newColumns.push(newColumnToAdd)
-
-		let newBoard = { ...board }
-		newBoard.columnOrder = newColumns.map((column) => column._id)
-		newBoard.columns = newColumns
-
-		setColumns(newColumns)
-		setBoard(newBoard)
-		setNewColumnTitle('')
-		toggleOpenNewColumnForm()
+		
+		// Call API
+		createNewColumn(newColumnToAdd).then(column => {
+			let newColumns = [...columns]
+			newColumns.push(column)
+	
+			let newBoard = { ...board }
+			newBoard.columnOrder = newColumns.map((column) => column._id)
+			newBoard.columns = newColumns
+	
+			setColumns(newColumns)
+			setBoard(newBoard)
+			setNewColumnTitle('')
+			toggleOpenNewColumnForm()
+		})
 	}
 
 	const onUpdateColumn = (newColumnToUpdate) => {

@@ -12,6 +12,7 @@ import {
 	onSelectALlInlineText,
 } from 'utilities/ContentEditable'
 import { MODAL_ACTION_CONFIRM } from 'utilities/constants'
+import { createNewCard } from 'actions/ApiCall'
 
 function Column({ column, onCardDrop, onUpdateColumn }) {
 	const cards = mapOrder(column.cards, column.cardOrder, '_id')
@@ -68,20 +69,20 @@ function Column({ column, onCardDrop, onUpdateColumn }) {
 		const newCardToAdd = {
 			boardId: column.boardId,
 			columnId: column._id,
-			id: Math.random().toString(36).substr(2, 5), // Create 5 random characters
-			title: newCardTitle.trim(),
-			cover: null,
+			title: newCardTitle,
 		}
-		let newColumn = cloneDeep(column)
-		newColumn.cards.push(newCardToAdd)
-		newColumn.cardOrder.push(newCardToAdd._id)
-
-		onUpdateColumn(newColumn)
-		setNewCardTitle('')
-		toggleOpenNewCardForm()
+		// Call API
+		createNewCard(newCardToAdd).then(card => {
+			console.log(card);
+			let newColumn = cloneDeep(column)
+			newColumn.cards.push(card)
+			newColumn.cardOrder.push(card._id)
+	
+			onUpdateColumn(newColumn)
+			setNewCardTitle('')
+			toggleOpenNewCardForm()
+		})
 	}
-
-
 
 	return (
 		<div className='column'>
