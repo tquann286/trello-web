@@ -1,3 +1,4 @@
+// Example data
 export const initialData = {
 	boards: [
 		{
