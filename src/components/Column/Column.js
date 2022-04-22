@@ -14,7 +14,7 @@ import {
 import { MODAL_ACTION_CONFIRM } from 'utilities/constants'
 
 function Column({ column, onCardDrop, onUpdateColumn }) {
-	const cards = mapOrder(column.cards, column.cardOrder, 'id')
+	const cards = mapOrder(column.cards, column.cardOrder, '_id')
 
 	const [showConfirmModal, SetShowConfirmModal] = useState(false)
 	const [columnTitle, setColumnTitle] = useState('')
@@ -67,14 +67,14 @@ function Column({ column, onCardDrop, onUpdateColumn }) {
 
 		const newCardToAdd = {
 			boardId: column.boardId,
-			columnId: column.id,
+			columnId: column._id,
 			id: Math.random().toString(36).substr(2, 5), // Create 5 random characters
 			title: newCardTitle.trim(),
 			cover: null,
 		}
 		let newColumn = cloneDeep(column)
 		newColumn.cards.push(newCardToAdd)
-		newColumn.cardOrder.push(newCardToAdd.id)
+		newColumn.cardOrder.push(newCardToAdd._id)
 
 		onUpdateColumn(newColumn)
 		setNewCardTitle('')
@@ -117,7 +117,7 @@ function Column({ column, onCardDrop, onUpdateColumn }) {
 			<div className='card-list'>
 				<Container
 					groupName='tq-columns'
-					onDrop={(dropResult) => onCardDrop(column.id, dropResult)}
+					onDrop={(dropResult) => onCardDrop(column._id, dropResult)}
 					getChildPayload={(index) => cards[index]}
 					dragClass='card-ghost'
 					dropClass='card-ghost-drop'
