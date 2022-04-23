@@ -12,9 +12,9 @@ import {
 	onSelectALlInlineText,
 } from 'utilities/ContentEditable'
 import { MODAL_ACTION_CONFIRM } from 'utilities/constants'
-import { createNewCard } from 'actions/ApiCall'
+import { createNewCard, updateColumn } from 'actions/ApiCall'
 
-function Column({ column, onCardDrop, onUpdateColumn }) {
+function Column({ column, onCardDrop, onUpdateColumnState }) {
 	const cards = mapOrder(column.cards, column.cardOrder, '_id')
 
 	const [showConfirmModal, SetShowConfirmModal] = useState(false)
@@ -43,10 +43,15 @@ function Column({ column, onCardDrop, onUpdateColumn }) {
 
 	const toggleShowConfirmModal = () => SetShowConfirmModal(!showConfirmModal)
 
+	// Remove column
 	const onConfirmModalAction = (type) => {
 		if (type === MODAL_ACTION_CONFIRM) {
 			const newColumn = { ...column, _detroy: true }
-			onUpdateColumn(newColumn)
+			
+			// Call API to remove column
+			updateColumn(newColumn._id, newColumn).then((updatedColumn) => {
+				onUpdateColumnState(updatedColumn)
+			})
 		}
 		toggleShowConfirmModal()
 	}
@@ -55,9 +60,16 @@ function Column({ column, onCardDrop, onUpdateColumn }) {
 		setColumnTitle(e.target.value)
 	}
 
+	// Update column title
 	const handleColumnTitleBlur = (e) => {
-		const newColumn = { ...column, title: columnTitle }
-		onUpdateColumn(newColumn)
+		if (column.title !== columnTitle) {
+			const newColumn = { ...column, title: columnTitle }
+			// Call API to update column
+			updateColumn(newColumn._id, newColumn).then((updatedColumn) => {
+				updatedColumn.cards = newColumn.cards
+				onUpdateColumnState(updatedColumn)
+			})
+		}
 	}
 
 	const addNewCard = () => {
@@ -72,13 +84,12 @@ function Column({ column, onCardDrop, onUpdateColumn }) {
 			title: newCardTitle,
 		}
 		// Call API
-		createNewCard(newCardToAdd).then(card => {
-			console.log(card);
+		createNewCard(newCardToAdd).then((card) => {
 			let newColumn = cloneDeep(column)
 			newColumn.cards.push(card)
 			newColumn.cardOrder.push(card._id)
-	
-			onUpdateColumn(newColumn)
+
+			onUpdateColumnState(newColumn)
 			setNewCardTitle('')
 			toggleOpenNewCardForm()
 		})
@@ -103,9 +114,16 @@ function Column({ column, onCardDrop, onUpdateColumn }) {
 				</div>
 				<div className='column-dropdown-actions'>
 					<Dropdown>
-						<Dropdown.Toggle className='dropdown-btn' variant='' size='sm' id="dropdown-basic" />
+						<Dropdown.Toggle
+							className='dropdown-btn'
+							variant=''
+							size='sm'
+							id='dropdown-basic'
+						/>
 						<Dropdown.Menu>
-							<Dropdown.Item onClick={toggleOpenNewCardForm}>{openNewCardForm && 'Close '}Add Card</Dropdown.Item>
+							<Dropdown.Item onClick={toggleOpenNewCardForm}>
+								{openNewCardForm && 'Close '}Add Card
+							</Dropdown.Item>
 							<Dropdown.Item onClick={toggleShowConfirmModal}>
 								Remove Column
 							</Dropdown.Item>
@@ -160,7 +178,9 @@ function Column({ column, onCardDrop, onUpdateColumn }) {
 					</div>
 				) : (
 					<React.Fragment>
-						<Button size='sm' onClick={addNewCard}>Add card</Button>
+						<Button size='sm' onClick={addNewCard}>
+							Add card
+						</Button>
 						<span className='cancel-icon' onClick={toggleOpenNewCardForm}>
 							<i className='fa fa-trash icon' />
 						</span>

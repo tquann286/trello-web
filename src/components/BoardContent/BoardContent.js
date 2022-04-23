@@ -86,7 +86,7 @@ function BoardContent() {
 			boardId: board._id,
 			title: newColumnTitle,
 		}
-		
+
 		// Call API
 		createNewColumn(newColumnToAdd).then(column => {
 			let newColumns = [...columns]
@@ -103,7 +103,7 @@ function BoardContent() {
 		})
 	}
 
-	const onUpdateColumn = (newColumnToUpdate) => {
+	const onUpdateColumnState = (newColumnToUpdate) => {
 		const columnIdToUpdate = newColumnToUpdate._id
 
 		let newColumns = [...columns]
@@ -143,7 +143,7 @@ function BoardContent() {
 						<Column
 							column={column}
 							onCardDrop={onCardDrop}
-							onUpdateColumn={onUpdateColumn}
+							onUpdateColumnState={onUpdateColumnState}
 						/>
 					</Draggable>
 				))}
