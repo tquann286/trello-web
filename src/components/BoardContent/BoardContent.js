@@ -8,7 +8,7 @@ import {
 	Form,
 	Button,
 } from 'react-bootstrap'
-import { isEmpty } from 'lodash'
+import { isEmpty, cloneDeep } from 'lodash'
 
 import Column from 'components/Column/Column'
 import { mapOrder } from 'utilities/sorts'
@@ -29,7 +29,7 @@ function BoardContent() {
 	}
 
 	useEffect(() => {
-		const boardId = '62617632e89b1220b86c4de4'
+		const boardId = '6263d1843041990688f1b507'
 		fetchBoardDetails(boardId).then(board => {
 			setBoard(board)
 
@@ -54,18 +54,22 @@ function BoardContent() {
 	}
 
 	const onColumnDrop = (dropResult) => {
-		let newColumns = [...columns]
+		let newColumns = cloneDeep(columns)
 		newColumns = applyDrag(newColumns, dropResult)
-		let newBoard = { ...board }
+		let newBoard = cloneDeep(board)
 		newBoard.columnOrder = newColumns.map((column) => column._id)
 		newBoard.columns = newColumns
 
-		// Call api to update column order in board detail
-		updateBoard(newBoard._id, newBoard).then(board => {
-
-		})
 		setColumns(newColumns)
 		setBoard(newBoard)
+
+		// Call api to update column order in board detail
+		updateBoard(newBoard._id, newBoard).catch(error => {
+			console.log(error)
+
+			setColumns(columns)
+			setBoard(board)
+		})
 	}
 
 	const onCardDrop = (columnId, dropResult) => {
