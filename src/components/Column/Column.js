@@ -43,6 +43,7 @@ function Column({ column, onCardDrop, onUpdateColumnState }) {
 
 	const toggleShowConfirmModal = () => SetShowConfirmModal(!showConfirmModal)
 
+	
 	// Remove column
 	const onConfirmModalAction = (type) => {
 		if (type === MODAL_ACTION_CONFIRM) {
