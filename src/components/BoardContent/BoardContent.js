@@ -111,7 +111,7 @@ function BoardContent() {
 			(col) => col._id === columnIdToUpdate
 		)
 
-		if (newColumnToUpdate._detroy) {
+		if (newColumnToUpdate._destroy) {
 			newColumns.splice(columnIndexToUpdate, 1)
 		} else {
 			newColumns.splice(columnIndexToUpdate, 1, newColumnToUpdate)

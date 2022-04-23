@@ -46,7 +46,7 @@ function Column({ column, onCardDrop, onUpdateColumnState }) {
 	// Remove column
 	const onConfirmModalAction = (type) => {
 		if (type === MODAL_ACTION_CONFIRM) {
-			const newColumn = { ...column, _detroy: true }
+			const newColumn = { ...column, _destroy: true }
 			
 			// Call API to remove column
 			updateColumn(newColumn._id, newColumn).then((updatedColumn) => {
