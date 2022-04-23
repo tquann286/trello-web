@@ -14,7 +14,7 @@ import Column from 'components/Column/Column'
 import { mapOrder } from 'utilities/sorts'
 import { applyDrag } from 'utilities/dragDrop'
 
-import { fetchBoardDetails, createNewColumn } from 'actions/ApiCall'
+import { updateBoard, fetchBoardDetails, createNewColumn } from 'actions/ApiCall'
 
 function BoardContent() {
 	const [board, setBoard] = useState({})
@@ -60,6 +60,10 @@ function BoardContent() {
 		newBoard.columnOrder = newColumns.map((column) => column._id)
 		newBoard.columns = newColumns
 
+		// Call api to update column order in board detail
+		updateBoard(newBoard._id, newBoard).then(board => {
+
+		})
 		setColumns(newColumns)
 		setBoard(newBoard)
 	}
