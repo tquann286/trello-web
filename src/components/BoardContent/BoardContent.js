@@ -19,6 +19,7 @@ import {
 	fetchBoardDetails,
 	createNewColumn,
 	updateColumn,
+	updateCard
 } from 'actions/ApiCall'
 
 function BoardContent() {
@@ -34,7 +35,7 @@ function BoardContent() {
 	}
 
 	useEffect(() => {
-		const boardId = '6263d1843041990688f1b507'
+		const boardId = '62769ed9cfef0e2744547af8'
 		fetchBoardDetails(boardId).then((board) => {
 			setBoard(board)
 
@@ -87,7 +88,6 @@ function BoardContent() {
 			currentColumn.cardOrder = currentColumn.cards.map((card) => card._id)
 
 			setColumns(newColumns)
-
 			if (dropResult.removedIndex !== null && dropResult.addedIndex !== null) {
 				/**
 				 * Action: move card in the same column
@@ -101,12 +101,13 @@ function BoardContent() {
 				 * Action: move card between two column
 				 * 1- Call api update cardOrder in current column
 				 */
-				// updateColumn(currentColumn._id, currentColumn).catch(() => setColumns(columns))
+				updateColumn(currentColumn._id, currentColumn).catch(() => setColumns(columns))
 
 				if (dropResult.addedIndex !== null) {
 					let currentCard = cloneDeep(dropResult.payload)
 					currentCard.columnId = currentColumn._id
 					// 2 - Call api update columnIn in current card
+					updateCard(currentCard._id, currentCard)
 				}
 			}
 		}

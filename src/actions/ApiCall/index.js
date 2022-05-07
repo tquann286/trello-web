@@ -26,3 +26,9 @@ export const createNewCard = async (data) => {
   const request = await axios.post(`${API_ROOT}/v1/cards`, data)
   return request.data
 }
+
+// Update or remove card
+export const updateCard = async (id, data) => {
+  const request = await axios.put(`${API_ROOT}/v1/cards/${id}`, data)
+  return request.data
+}
