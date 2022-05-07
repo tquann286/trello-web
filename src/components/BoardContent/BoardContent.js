@@ -60,7 +60,7 @@ function BoardContent() {
 	}
 
 	const onColumnDrop = (dropResult) => {
-		let newColumns = [ ... columns ]
+		let newColumns = cloneDeep(columns)
 		newColumns = applyDrag(newColumns, dropResult)
 
 		let newBoard = cloneDeep(board)
