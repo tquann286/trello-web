@@ -14,7 +14,7 @@ import Column from 'components/Column/Column'
 import { mapOrder } from 'utilities/sorts'
 import { applyDrag } from 'utilities/dragDrop'
 
-import { updateBoard, fetchBoardDetails, createNewColumn } from 'actions/ApiCall'
+import { updateBoard, fetchBoardDetails, createNewColumn, updateColumn } from 'actions/ApiCall'
 
 function BoardContent() {
 	const [board, setBoard] = useState({})
@@ -74,13 +74,33 @@ function BoardContent() {
 
 	const onCardDrop = (columnId, dropResult) => {
 		if (dropResult.removedIndex !== null || dropResult.addedIndex !== null) {
-			let newColumns = [...columns]
+			let newColumns = cloneDeep(columns)
 
 			let currentColumn = newColumns.find((c) => c._id === columnId)
 			currentColumn.cards = applyDrag(currentColumn.cards, dropResult)
 			currentColumn.cardOrder = currentColumn.cards.map((card) => card._id)
 
 			setColumns(newColumns)
+
+			if (dropResult.removedIndex !== null && dropResult.addedIndex !== null) {
+				/**
+				 * Action: move card in the same column 
+				 * 1- Call api update cardOrder in current column
+				 */ 
+				updateColumn(currentColumn._id, currentColumn).catch(() => setColumns(columns))
+			} else {
+				/**
+				 * Action: move card between two column
+				 * 1- Call api update cardOrder in current column
+				 * 2 -Call api update columnIn in current card
+				 */
+				// updateColumn(currentColumn._id, currentColumn).catch(() => setColumns(columns))
+
+				if (dropResult.addedIndex !== null) {
+					let currentCard = cloneDeep(dropResult.payload)
+					currentCard.columnId = currentColumn._id
+				}
+			}
 		}
 	}
 
