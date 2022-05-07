@@ -60,7 +60,7 @@ function BoardContent() {
 	}
 
 	const onColumnDrop = (dropResult) => {
-		let newColumns = cloneDeep(columns)
+		let newColumns = [ ... columns ]
 		newColumns = applyDrag(newColumns, dropResult)
 
 		let newBoard = cloneDeep(board)
@@ -81,12 +81,13 @@ function BoardContent() {
 
 	const onCardDrop = (columnId, dropResult) => {
 		if (dropResult.removedIndex !== null || dropResult.addedIndex !== null) {
-			let newColumns = cloneDeep(columns)
+			let newColumns = [ ... columns ]
 
 			let currentColumn = newColumns.find((c) => c._id === columnId)
 			currentColumn.cards = applyDrag(currentColumn.cards, dropResult)
 			currentColumn.cardOrder = currentColumn.cards.map((card) => card._id)
 
+			console.log(newColumns);
 			setColumns(newColumns)
 			if (dropResult.removedIndex !== null && dropResult.addedIndex !== null) {
 				/**
