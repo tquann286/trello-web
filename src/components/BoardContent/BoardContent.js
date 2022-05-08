@@ -10,6 +10,7 @@ import {
 } from 'react-bootstrap'
 import { isEmpty, cloneDeep } from 'lodash'
 
+import Loading from 'components/Common/Loading'
 import Column from 'components/Column/Column'
 import { mapOrder } from 'utilities/sorts'
 import { applyDrag } from 'utilities/dragDrop'
@@ -19,11 +20,12 @@ import {
 	fetchBoardDetails,
 	createNewColumn,
 	updateColumn,
-	updateCard
+	updateCard,
 } from 'actions/ApiCall'
 
 function BoardContent() {
 	const [board, setBoard] = useState({})
+	const [isLoadingBoard, setIsLoadingBoard] = useState(true)
 	const [columns, setColumns] = useState({})
 	const [openNewColumnForm, setOpenNewColumnForm] = useState(false)
 	const toggleOpenNewColumnForm = () => setOpenNewColumnForm(!openNewColumnForm)
@@ -41,6 +43,7 @@ function BoardContent() {
 
 			// Sort column
 			setColumns(mapOrder(board.columns, board.columnOrder, '_id'))
+			setIsLoadingBoard(false)
 		})
 	}, [])
 
@@ -50,14 +53,6 @@ function BoardContent() {
 			newColumnInputRef.current.select()
 		}
 	}, [openNewColumnForm])
-
-	if (isEmpty(board)) {
-		return (
-			<div className='not-found' style={{ padding: '10px', color: 'white' }}>
-				Board not found.
-			</div>
-		)
-	}
 
 	const onColumnDrop = (dropResult) => {
 		let newColumns = cloneDeep(columns)
@@ -81,13 +76,13 @@ function BoardContent() {
 
 	const onCardDrop = (columnId, dropResult) => {
 		if (dropResult.removedIndex !== null || dropResult.addedIndex !== null) {
-			let newColumns = [ ... columns ]
+			let newColumns = [...columns]
 
 			let currentColumn = newColumns.find((c) => c._id === columnId)
 			currentColumn.cards = applyDrag(currentColumn.cards, dropResult)
 			currentColumn.cardOrder = currentColumn.cards.map((card) => card._id)
 
-			console.log(newColumns);
+			console.log(newColumns)
 			setColumns(newColumns)
 			if (dropResult.removedIndex !== null && dropResult.addedIndex !== null) {
 				/**
@@ -102,7 +97,9 @@ function BoardContent() {
 				 * Action: move card between two column
 				 * 1- Call api update cardOrder in current column
 				 */
-				updateColumn(currentColumn._id, currentColumn).catch(() => setColumns(columns))
+				updateColumn(currentColumn._id, currentColumn).catch(() =>
+					setColumns(columns)
+				)
 
 				if (dropResult.addedIndex !== null) {
 					let currentCard = cloneDeep(dropResult.payload)
@@ -161,6 +158,16 @@ function BoardContent() {
 
 		setColumns(newColumns)
 		setBoard(newBoard)
+	}
+
+	if (isLoadingBoard) return <Loading />
+
+	if (isEmpty(board)) {
+		return (
+			<div className='not-found' style={{ padding: '10px', color: 'white' }}>
+				Board not found.
+			</div>
+		)
 	}
 
 	return (
